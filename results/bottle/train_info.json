@@ -1,0 +1,36 @@
+{
+  "category": "bottle",
+  "checkpoint": "C:\\Users\\iness\\Desktop\\industrial_anomaly_detection\\models\\patchcore_bottle.ckpt",
+  "train_time_s": 2496.7,
+  "memory_bank_shape": [
+    21401,
+    1536
+  ],
+  "image_threshold_raw": 37.87176513671875,
+  "pixel_threshold_raw": 37.21614074707031,
+  "image_score_range_raw": [
+    21.161548614501953,
+    75.83924865722656
+  ],
+  "pixel_score_range_raw": [
+    1.9623944759368896,
+    75.32797241210938
+  ],
+  "model_class": "Patchcore",
+  "model_config": {
+    "backbone": "wide_resnet50_2",
+    "layers": [
+      "layer2",
+      "layer3"
+    ],
+    "pre_trained": true,
+    "coreset_sampling_ratio": 0.1,
+    "num_neighbors": 9,
+    "image_size": [
+      256,
+      256
+    ],
+    "center_crop": null
+  },
+  "val_split_mode": "same_as_test"
+}

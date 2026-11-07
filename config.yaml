@@ -12,7 +12,7 @@ data:
   train_batch_size: 16
   eval_batch_size: 16
   # Mettre 0 sous Windows si vous avez des erreurs de DataLoader
-  num_workers: 4
+  num_workers: 0
   # Comment Anomalib choisit le jeu de validation (sert à fixer le seuil) :
   #   same_as_test : protocole standard des articles MVTec (validation = test)
   #   from_test    : une partie du test est réservée à la validation (plus rigoureux
