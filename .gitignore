@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+data/
+outputs/
+models/
+*.tar.xz
+tests/fake_mvtec/
+tests/_out*/
+.venv/
+venv/
+# Les résultats (métriques, figures) peuvent être versionnés, sauf les gros fichiers :
+results/**/predictions.npz

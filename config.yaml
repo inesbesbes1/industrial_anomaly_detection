@@ -1,0 +1,39 @@
+# =====================================================================
+#  Configuration - Partie A : modèle de détection (PatchCore / Anomalib)
+#  Tous les chemins sont relatifs au dossier du projet.
+# =====================================================================
+
+data:
+  # Dossier où se trouvent bottle.tar.xz et cable.tar.xz
+  archives_dir: .
+  # Dossier où le dataset sera extrait (structure MVTec AD standard)
+  root: data/MVTecAD
+  categories: [bottle, cable]
+  train_batch_size: 16
+  eval_batch_size: 16
+  # Mettre 0 sous Windows si vous avez des erreurs de DataLoader
+  num_workers: 4
+  # Comment Anomalib choisit le jeu de validation (sert à fixer le seuil) :
+  #   same_as_test : protocole standard des articles MVTec (validation = test)
+  #   from_test    : une partie du test est réservée à la validation (plus rigoureux
+  #                  pour le F1, mais le test devient plus petit)
+  val_split_mode: same_as_test
+  val_split_ratio: 0.5
+
+model:
+  backbone: wide_resnet50_2      # backbone du papier PatchCore
+  layers: [layer2, layer3]       # couches intermédiaires utilisées par PatchCore
+  pre_trained: true              # poids ImageNet (mettre false uniquement pour les tests)
+  coreset_sampling_ratio: 0.1    # 10 % des patchs gardés dans la banque mémoire
+  num_neighbors: 9
+  image_size: [256, 256]
+  center_crop: null              # ex. [224, 224] pour reproduire le papier exactement
+
+training:
+  seed: 42
+  accelerator: auto              # auto = GPU si disponible, sinon CPU
+
+paths:
+  models_dir: models             # checkpoints finaux : models/patchcore_<categorie>.ckpt
+  outputs_dir: outputs           # dossiers de travail Anomalib
+  results_dir: results           # métriques, figures, CSV

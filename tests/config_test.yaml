@@ -1,0 +1,25 @@
+# Config de test rapide (dataset synthétique, CPU, backbone non pré-entraîné)
+data:
+  archives_dir: .
+  root: tests/fake_mvtec
+  categories: [bottle, cable]
+  train_batch_size: 8
+  eval_batch_size: 8
+  num_workers: 0
+  val_split_mode: same_as_test
+  val_split_ratio: 0.5
+model:
+  backbone: wide_resnet50_2
+  layers: [layer2, layer3]
+  pre_trained: false
+  coreset_sampling_ratio: 0.1
+  num_neighbors: 9
+  image_size: [256, 256]
+  center_crop: null
+training:
+  seed: 42
+  accelerator: cpu
+paths:
+  models_dir: tests/_out/models
+  outputs_dir: tests/_out/outputs
+  results_dir: tests/_out/results
