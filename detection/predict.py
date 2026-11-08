@@ -93,7 +93,13 @@ def predict(image, category: str, config: str | Path | None = None) -> dict:
     model, cfg, dev = get_model(category, config)
     rgb = _to_rgb(image)
     h, w = rgb.shape[:2]
+    
+    import torch.nn.functional as F
+
     x = torch.from_numpy(rgb).permute(2, 0, 1).float().div(255.0).unsqueeze(0).to(dev)
+    size = tuple(cfg["model"].get("image_size", (256, 256)))
+    # Même redimensionnement que le PreProcessor utilisé à l'évaluation (antialias=True)
+    x = F.interpolate(x, size=size, mode="bilinear", antialias=True, align_corners=False)
 
     t0 = time.perf_counter()
     with torch.no_grad():

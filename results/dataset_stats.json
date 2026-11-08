@@ -1,0 +1,61 @@
+{
+  "bottle": {
+    "train_good": 209,
+    "test": {
+      "broken_large": 20,
+      "broken_small": 22,
+      "contamination": 21,
+      "good": 20
+    },
+    "masks": {
+      "broken_large": 20,
+      "broken_small": 22,
+      "contamination": 21
+    },
+    "resolution": "900x900",
+    "test_good": 20,
+    "test_defect": 63,
+    "defect_types": [
+      "broken_large",
+      "broken_small",
+      "contamination"
+    ]
+  },
+  "cable": {
+    "train_good": 224,
+    "test": {
+      "bent_wire": 13,
+      "cable_swap": 12,
+      "combined": 11,
+      "cut_inner_insulation": 14,
+      "cut_outer_insulation": 10,
+      "good": 58,
+      "missing_cable": 12,
+      "missing_wire": 10,
+      "poke_insulation": 10
+    },
+    "masks": {
+      "bent_wire": 13,
+      "cable_swap": 12,
+      "combined": 11,
+      "cut_inner_insulation": 14,
+      "cut_outer_insulation": 10,
+      "missing_cable": 12,
+      "missing_wire": 10,
+      "poke_insulation": 10
+    },
+    "resolution": "1024x1024",
+    "test_good": 58,
+    "test_defect": 92,
+    "defect_types": [
+      "bent_wire",
+      "cable_swap",
+      "combined",
+      "cut_inner_insulation",
+      "cut_outer_insulation",
+      "missing_cable",
+      "missing_wire",
+      "poke_insulation"
+    ]
+  }
+}
