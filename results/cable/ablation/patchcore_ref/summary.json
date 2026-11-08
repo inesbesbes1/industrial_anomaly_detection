@@ -1,0 +1,13 @@
+{
+  "variante": "patchcore_ref",
+  "modele": "Patchcore",
+  "backbone": "wide_resnet50_2",
+  "couches": "layer2+layer3",
+  "coreset": 0.1,
+  "auroc_image": 0.988,
+  "auroc_pixel": 0.9848,
+  "f1_image": 0.9783,
+  "temps_entrainement_s": 3636.5,
+  "ms_par_image": 1567.9,
+  "taille_banque": 22937
+}
