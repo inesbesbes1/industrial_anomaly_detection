@@ -1,0 +1,1 @@
+"""Package de post-traitement des cartes d'anomalies."""
