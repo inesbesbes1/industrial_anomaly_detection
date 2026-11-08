@@ -1,0 +1,14 @@
+{
+  "variante": "padim_r18_layers23",
+  "modele": "Padim",
+  "backbone": "resnet18",
+  "couches": "layer2+layer3",
+  "coreset": "-",
+  "auroc_image": 0.8501,
+  "auroc_pixel": 0.9552,
+  "f1_image": 0.8342,
+  "temps_entrainement_s": 128.2,
+  "ms_par_image": 517.4,
+  "taille_banque": "-",
+  "ms_forward_cpu": 127.1
+}

@@ -1,0 +1,14 @@
+{
+  "variante": "patchcore_resnet18",
+  "modele": "Patchcore",
+  "backbone": "resnet18",
+  "couches": "layer2+layer3",
+  "coreset": 0.1,
+  "auroc_image": 0.9696,
+  "auroc_pixel": 0.9816,
+  "f1_image": 0.9263,
+  "temps_entrainement_s": 2178.9,
+  "ms_par_image": 728.7,
+  "taille_banque": 22937,
+  "ms_forward_cpu": 344.7
+}

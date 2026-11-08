@@ -1,0 +1,9 @@
+| variante | modele | backbone | couches | coreset | auroc_image | auroc_pixel | f1_image | temps_entrainement_s | ms_par_image | taille_banque | ms_forward_cpu | n_features |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| patchcore_ref | Patchcore | wide_resnet50_2 | layer2+layer3 | 0.1 | 0.988 | 0.9848 | 0.9783 | 3636.5 | 1567.9 | 22937 | - | - |
+| patchcore_coreset_1pct | Patchcore | wide_resnet50_2 | layer2+layer3 | 0.01 | 0.991 | 0.9832 | 0.973 | 458.7 | 835.6 | 2293 | 535.9 | - |
+| patchcore_resnet18 | Patchcore | resnet18 | layer2+layer3 | 0.1 | 0.9696 | 0.9816 | 0.9263 | 2178.9 | 728.7 | 22937 | 344.7 | - |
+| patchcore_layer3_only | Patchcore | wide_resnet50_2 | layer3 | 0.1 | 0.9895 | 0.9791 | 0.9579 | 278.6 | 804.8 | 5734 | 385.9 | - |
+| padim_r18 | Padim | resnet18 | layer1+layer2+layer3 | - | 0.8291 | 0.9618 | 0.8066 | 120.2 | 579.0 | - | - | - |
+| padim_r18_layers23 | Padim | resnet18 | layer2+layer3 | - | 0.8501 | 0.9552 | 0.8342 | 128.2 | 517.4 | - | 127.1 | - |
+| padim_wrn50 | Padim | wide_resnet50_2 | layer2+layer3 | - | 0.89 | 0.9746 | 0.8729 | 242.3 | 1018.2 | - | 796.2 | 300 |

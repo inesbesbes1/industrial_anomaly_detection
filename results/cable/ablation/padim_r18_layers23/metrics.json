@@ -1,0 +1,99 @@
+{
+  "n_test_images": 150,
+  "n_normal": 58,
+  "n_defective": 92,
+  "image_auroc": 0.8500749625187406,
+  "pixel_auroc": 0.9552426801761985,
+  "image_threshold_raw": 28.642152786254883,
+  "pixel_threshold_raw": 20.676633834838867,
+  "image_precision": 0.8210526315789474,
+  "image_recall": 0.8478260869565217,
+  "image_f1": 0.8342245989304813,
+  "image_accuracy": 0.7933333333333333,
+  "false_alarm_rate": 0.29310344827586204,
+  "pixel_f1": 0.4438518276293182,
+  "confusion_matrix": {
+    "tn": 41,
+    "fp": 17,
+    "fn": 14,
+    "tp": 78
+  },
+  "per_defect_type": {
+    "bent_wire": {
+      "n_images": 13,
+      "image_auroc": 0.9880636604774535,
+      "detection_rate": 1.0,
+      "pixel_auroc": 0.9768219576452623,
+      "mean_score_raw": 83.16570281982422
+    },
+    "cable_swap": {
+      "n_images": 12,
+      "image_auroc": 0.7054597701149425,
+      "detection_rate": 0.6666666666666666,
+      "pixel_auroc": 0.9404112401241883,
+      "mean_score_raw": 33.59103775024414
+    },
+    "combined": {
+      "n_images": 11,
+      "image_auroc": 0.9200626959247649,
+      "detection_rate": 0.9090909090909091,
+      "pixel_auroc": 0.9285099842682252,
+      "mean_score_raw": 61.122291564941406
+    },
+    "cut_inner_insulation": {
+      "n_images": 14,
+      "image_auroc": 0.8854679802955665,
+      "detection_rate": 0.8571428571428571,
+      "pixel_auroc": 0.9332566341888346,
+      "mean_score_raw": 49.56017303466797
+    },
+    "cut_outer_insulation": {
+      "n_images": 10,
+      "image_auroc": 0.9620689655172413,
+      "detection_rate": 1.0,
+      "pixel_auroc": 0.9340045214702835,
+      "mean_score_raw": 55.60430908203125
+    },
+    "missing_cable": {
+      "n_images": 12,
+      "image_auroc": 0.8936781609195402,
+      "detection_rate": 0.9166666666666666,
+      "pixel_auroc": 0.9663569304660165,
+      "mean_score_raw": 52.72378158569336
+    },
+    "missing_wire": {
+      "n_images": 10,
+      "image_auroc": 0.6448275862068966,
+      "detection_rate": 0.5,
+      "pixel_auroc": 0.928821591304767,
+      "mean_score_raw": 31.907886505126953
+    },
+    "poke_insulation": {
+      "n_images": 10,
+      "image_auroc": 0.7586206896551725,
+      "detection_rate": 0.9,
+      "pixel_auroc": 0.953606729146533,
+      "mean_score_raw": 37.78303909301758
+    }
+  },
+  "seconds_per_image": 0.5173509493338254,
+  "anomalib_official_metrics": {
+    "image_AUROC": 0.8500749468803406,
+    "image_F1Score": 0.8279569745063782,
+    "pixel_AUROC": 0.9552427530288696,
+    "pixel_F1Score": 0.4438496232032776
+  },
+  "normalization": {
+    "image_threshold_raw": 28.642152786254883,
+    "pixel_threshold_raw": 20.676633834838867,
+    "image_score_range_raw": [
+      17.879013061523438,
+      145.5051727294922
+    ],
+    "pixel_score_range_raw": [
+      5.724761486053467,
+      145.5051727294922
+    ]
+  },
+  "category": "cable"
+}

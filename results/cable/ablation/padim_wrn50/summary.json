@@ -1,0 +1,15 @@
+{
+  "variante": "padim_wrn50",
+  "modele": "Padim",
+  "backbone": "wide_resnet50_2",
+  "couches": "layer2+layer3",
+  "coreset": "-",
+  "auroc_image": 0.89,
+  "auroc_pixel": 0.9746,
+  "f1_image": 0.8729,
+  "temps_entrainement_s": 242.3,
+  "ms_par_image": 1018.2,
+  "taille_banque": "-",
+  "n_features": 300,
+  "ms_forward_cpu": 796.2
+}

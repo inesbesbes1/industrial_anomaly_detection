@@ -1,0 +1,14 @@
+{
+  "variante": "patchcore_coreset_1pct",
+  "modele": "Patchcore",
+  "backbone": "wide_resnet50_2",
+  "couches": "layer2+layer3",
+  "coreset": 0.01,
+  "auroc_image": 0.991,
+  "auroc_pixel": 0.9832,
+  "f1_image": 0.973,
+  "temps_entrainement_s": 458.7,
+  "ms_par_image": 835.6,
+  "taille_banque": 2293,
+  "ms_forward_cpu": 535.9
+}
