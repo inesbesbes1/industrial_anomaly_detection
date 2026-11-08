@@ -1,0 +1,1 @@
+"""Package LLM pour l'explication et l'aide à la décision industrielle."""

@@ -10,3 +10,7 @@ numpy>=1.24
 # torch et torchvision sont installés avec anomalib.
 # Pour utiliser un GPU NVIDIA sous Windows, installez d'abord PyTorch avec CUDA
 # depuis https://pytorch.org/get-started/locally/ puis lancez pip install -r requirements.txt
+streamlit
+fpdf2
+ollama
+pillow
