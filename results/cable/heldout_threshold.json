@@ -1,0 +1,43 @@
+{
+  "reference": {
+    "f1": 0.967741935483871,
+    "precision": 0.9574468085106383,
+    "recall": 0.9782608695652174,
+    "false_alarm_rate": 0.06896551724137931,
+    "miss_rate": 0.021739130434782608,
+    "fp": 4,
+    "fn": 2
+  },
+  "heldout_mean": {
+    "f1": 0.9554963964675572,
+    "precision": 0.9431287061385868,
+    "recall": 0.9694565217391304,
+    "false_alarm_rate": 0.09534482758620691,
+    "miss_rate": 0.03054347826086956,
+    "fp": 2.765,
+    "fn": 1.405,
+    "threshold": 42.09416094779968
+  },
+  "heldout_std": {
+    "f1": 0.0166162219943977,
+    "precision": 0.03258445762701631,
+    "recall": 0.024411552860141413,
+    "false_alarm_rate": 0.06012051907059252,
+    "miss_rate": 0.02441155286014141,
+    "fp": 1.743495053047183,
+    "fn": 1.1229314315665049,
+    "threshold": 0.6805579352313342
+  },
+  "per_type_detection_mean": {
+    "bent_wire": 1.0,
+    "cable_swap": 0.8725,
+    "combined": 1.0,
+    "cut_inner_insulation": 1.0,
+    "cut_outer_insulation": 1.0,
+    "missing_cable": 1.0,
+    "missing_wire": 1.0,
+    "poke_insulation": 0.872
+  },
+  "repeats": 200,
+  "seed": 42
+}
