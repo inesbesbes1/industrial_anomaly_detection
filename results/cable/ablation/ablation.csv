@@ -1,0 +1,3 @@
+variante,modele,backbone,couches,coreset,auroc_image,auroc_pixel,f1_image,temps_entrainement_s,ms_par_image,taille_banque
+patchcore_ref,Patchcore,wide_resnet50_2,layer2+layer3,0.1,0.988,0.9848,0.9783,3636.5,1567.9,22937
+padim_r18,Padim,resnet18,layer1+layer2+layer3,-,0.8291,0.9618,0.8066,120.2,579.0,-
