@@ -8,7 +8,7 @@ data:
   archives_dir: .
   # Dossier où le dataset sera extrait (structure MVTec AD standard)
   root: data/MVTecAD
-  categories: [bottle, cable]
+  categories: [bottle, cable, transistor]
   train_batch_size: 16
   eval_batch_size: 16
   # Mettre 0 sous Windows si vous avez des erreurs de DataLoader

@@ -1,0 +1,36 @@
+{
+  "category": "transistor",
+  "checkpoint": "C:\\Users\\iness\\Desktop\\industrial_anomaly_detection\\models\\patchcore_transistor.ckpt",
+  "train_time_s": 2239.6,
+  "memory_bank_shape": [
+    21811,
+    1536
+  ],
+  "image_threshold_raw": 37.67742156982422,
+  "pixel_threshold_raw": 31.754966735839844,
+  "image_score_range_raw": [
+    29.504663467407227,
+    67.68598175048828
+  ],
+  "pixel_score_range_raw": [
+    10.374164581298828,
+    67.3942642211914
+  ],
+  "model_class": "Patchcore",
+  "model_config": {
+    "backbone": "wide_resnet50_2",
+    "layers": [
+      "layer2",
+      "layer3"
+    ],
+    "pre_trained": true,
+    "coreset_sampling_ratio": 0.1,
+    "num_neighbors": 9,
+    "image_size": [
+      256,
+      256
+    ],
+    "center_crop": null
+  },
+  "val_split_mode": "same_as_test"
+}
