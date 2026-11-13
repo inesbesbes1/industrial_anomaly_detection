@@ -21,7 +21,7 @@
 
 | Type d'erreur | Fichier | Catégorie de défaut | Score brut |
 |---|---|---|---|
-| FP | 014.png | good | 44.9057 |
+| FP | 014.png | good | 44.9056 |
 | FP | 045.png | good | 39.6366 |
 | FN | 002.png | misplaced | 36.2201 |
 

@@ -1,7 +1,7 @@
 # Analyse des erreurs - cable
 
 - Images de test : 150 (58 normales, 92 défectueuses)
-- Seuil (score brut) : 42.6672
+- Seuil (score brut) : 42.6671
 - Faux positifs : **4** (images normales signalées comme défectueuses)
 - Faux négatifs : **2** (défauts non détectés)
 
@@ -9,14 +9,14 @@
 
 | Type | Images | Taux de détection | AUROC pixel | Score moyen (brut) |
 |---|---|---|---|---|
-| bent_wire | 13 | 100.0 % | 98.6 % | 66.083 |
+| bent_wire | 13 | 100.0 % | 98.6 % | 66.089 |
 | cable_swap | 12 | 91.7 % | 96.7 % | 43.865 |
-| combined | 11 | 100.0 % | 97.0 % | 62.182 |
-| cut_inner_insulation | 14 | 100.0 % | 98.4 % | 51.824 |
-| cut_outer_insulation | 10 | 100.0 % | 93.3 % | 52.455 |
-| missing_cable | 12 | 100.0 % | 99.5 % | 64.991 |
-| missing_wire | 10 | 100.0 % | 99.5 % | 53.992 |
-| poke_insulation | 10 | 90.0 % | 98.7 % | 46.041 |
+| combined | 11 | 100.0 % | 97.0 % | 62.219 |
+| cut_inner_insulation | 14 | 100.0 % | 98.4 % | 51.822 |
+| cut_outer_insulation | 10 | 100.0 % | 93.3 % | 52.452 |
+| missing_cable | 12 | 100.0 % | 99.5 % | 64.979 |
+| missing_wire | 10 | 100.0 % | 99.5 % | 54.155 |
+| poke_insulation | 10 | 90.0 % | 98.7 % | 46.040 |
 
 - Type le moins bien détecté : **poke_insulation** (90.0 % détectés)
 - Type le moins bien localisé : **cut_outer_insulation**
@@ -30,7 +30,7 @@
 | FP | 030.png | good | 44.6024 |
 | FP | 013.png | good | 43.0709 |
 | FN | 006.png | cable_swap | 40.8140 |
-| FN | 002.png | poke_insulation | 41.3989 |
+| FN | 002.png | poke_insulation | 41.3818 |
 
 ## Pistes d'interprétation (à rédiger dans le rapport)
 

@@ -2,9 +2,9 @@
 
 | Catégorie | AUROC image | AUROC pixel | F1 image | Précision | Rappel | Fausses alarmes | Temps / image |
 |---|---|---|---|---|---|---|---|
-| bottle | 100.0 % | 98.6 % | 100.0 % | 100.0 % | 100.0 % | 0.0 % | 1451 ms |
-| cable | 98.7 % | 98.5 % | 96.8 % | 95.7 % | 97.8 % | 6.9 % | 2107 ms |
-| transistor | 99.4 % | 97.3 % | 96.3 % | 95.1 % | 97.5 % | 3.3 % | 1391 ms |
+| bottle | 100.0 % | 98.6 % | 100.0 % | 100.0 % | 100.0 % | 0.0 % | 756 ms |
+| cable | 98.7 % | 98.5 % | 96.8 % | 95.7 % | 97.8 % | 6.9 % | 855 ms |
+| transistor | 99.4 % | 97.3 % | 96.3 % | 95.1 % | 97.5 % | 3.3 % | 824 ms |
 
 
 ### bottle : détail par type de défaut

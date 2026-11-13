@@ -1,0 +1,107 @@
+
+=== Analyse des erreurs : bottle ===
+# Analyse des erreurs - bottle
+
+- Images de test : 83 (20 normales, 63 défectueuses)
+- Seuil (score brut) : 37.8718
+- Faux positifs : **0** (images normales signalées comme défectueuses)
+- Faux négatifs : **0** (défauts non détectés)
+
+## Par type de défaut
+
+| Type | Images | Taux de détection | AUROC pixel | Score moyen (brut) |
+|---|---|---|---|---|
+| broken_large | 20 | 100.0 % | 98.3 % | 62.021 |
+| broken_small | 22 | 100.0 % | 99.4 % | 59.337 |
+| contamination | 21 | 100.0 % | 97.3 % | 55.992 |
+
+- Type le moins bien détecté : **broken_large** (100.0 % détectés)
+- Type le moins bien localisé : **contamination**
+
+
+## Pistes d'interprétation (à rédiger dans le rapport)
+
+- Faux négatifs : défauts petits ou peu contrastés, proches de l'apparence normale ?
+- Faux positifs : variations normales (reflets, position du câble, bruit) absentes du train ?
+- Comparer les figures `examples_<type>.png` : la heatmap pointe-t-elle au bon endroit ?
+- Effet du seuil : voir `score_hist.png` (chevauchement des deux distributions).
+
+
+=== Analyse des erreurs : cable ===
+# Analyse des erreurs - cable
+
+- Images de test : 150 (58 normales, 92 défectueuses)
+- Seuil (score brut) : 42.6671
+- Faux positifs : **4** (images normales signalées comme défectueuses)
+- Faux négatifs : **2** (défauts non détectés)
+
+## Par type de défaut
+
+| Type | Images | Taux de détection | AUROC pixel | Score moyen (brut) |
+|---|---|---|---|---|
+| bent_wire | 13 | 100.0 % | 98.6 % | 66.089 |
+| cable_swap | 12 | 91.7 % | 96.7 % | 43.865 |
+| combined | 11 | 100.0 % | 97.0 % | 62.219 |
+| cut_inner_insulation | 14 | 100.0 % | 98.4 % | 51.822 |
+| cut_outer_insulation | 10 | 100.0 % | 93.3 % | 52.452 |
+| missing_cable | 12 | 100.0 % | 99.5 % | 64.979 |
+| missing_wire | 10 | 100.0 % | 99.5 % | 54.155 |
+| poke_insulation | 10 | 90.0 % | 98.7 % | 46.040 |
+
+- Type le moins bien détecté : **poke_insulation** (90.0 % détectés)
+- Type le moins bien localisé : **cut_outer_insulation**
+
+## Liste des erreurs
+
+| Type d'erreur | Fichier | Catégorie de défaut | Score brut |
+|---|---|---|---|
+| FP | 057.png | good | 48.1822 |
+| FP | 039.png | good | 45.1888 |
+| FP | 030.png | good | 44.6024 |
+| FP | 013.png | good | 43.0709 |
+| FN | 006.png | cable_swap | 40.8140 |
+| FN | 002.png | poke_insulation | 41.3818 |
+
+## Pistes d'interprétation (à rédiger dans le rapport)
+
+- Faux négatifs : défauts petits ou peu contrastés, proches de l'apparence normale ?
+- Faux positifs : variations normales (reflets, position du câble, bruit) absentes du train ?
+- Comparer les figures `examples_<type>.png` : la heatmap pointe-t-elle au bon endroit ?
+- Effet du seuil : voir `score_hist.png` (chevauchement des deux distributions).
+
+
+=== Analyse des erreurs : transistor ===
+# Analyse des erreurs - transistor
+
+- Images de test : 100 (60 normales, 40 défectueuses)
+- Seuil (score brut) : 37.6774
+- Faux positifs : **2** (images normales signalées comme défectueuses)
+- Faux négatifs : **1** (défauts non détectés)
+
+## Par type de défaut
+
+| Type | Images | Taux de détection | AUROC pixel | Score moyen (brut) |
+|---|---|---|---|---|
+| bent_lead | 10 | 100.0 % | 98.3 % | 49.454 |
+| cut_lead | 10 | 100.0 % | 97.2 % | 47.701 |
+| damaged_case | 10 | 100.0 % | 98.6 % | 48.583 |
+| misplaced | 10 | 90.0 % | 86.5 % | 50.189 |
+
+- Type le moins bien détecté : **misplaced** (90.0 % détectés)
+- Type le moins bien localisé : **misplaced**
+
+## Liste des erreurs
+
+| Type d'erreur | Fichier | Catégorie de défaut | Score brut |
+|---|---|---|---|
+| FP | 014.png | good | 44.9056 |
+| FP | 045.png | good | 39.6366 |
+| FN | 002.png | misplaced | 36.2201 |
+
+## Pistes d'interprétation (à rédiger dans le rapport)
+
+- Faux négatifs : défauts petits ou peu contrastés, proches de l'apparence normale ?
+- Faux positifs : variations normales (reflets, position du câble, bruit) absentes du train ?
+- Comparer les figures `examples_<type>.png` : la heatmap pointe-t-elle au bon endroit ?
+- Effet du seuil : voir `score_hist.png` (chevauchement des deux distributions).
+

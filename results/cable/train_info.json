@@ -1,19 +1,19 @@
 {
   "category": "cable",
-  "checkpoint": "C:\\Users\\iness\\Desktop\\industrial_anomaly_detection\\models\\patchcore_cable.ckpt",
-  "train_time_s": 2816.1,
+  "checkpoint": "C:\\Users\\DELL\\Desktop\\industrial_anomaly_detection\\models\\patchcore_cable.ckpt",
+  "train_time_s": 6315.8,
   "memory_bank_shape": [
     22937,
     1536
   ],
-  "image_threshold_raw": 42.66718673706055,
-  "pixel_threshold_raw": 40.370513916015625,
+  "image_threshold_raw": 42.66714096069336,
+  "pixel_threshold_raw": 40.37064743041992,
   "image_score_range_raw": [
-    35.946720123291016,
-    81.67460632324219
+    35.946781158447266,
+    81.67459106445312
   ],
   "pixel_score_range_raw": [
-    18.565773010253906,
+    18.56580924987793,
     79.43486022949219
   ],
   "model_class": "Patchcore",

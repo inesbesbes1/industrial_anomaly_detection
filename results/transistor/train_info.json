@@ -1,20 +1,20 @@
 {
   "category": "transistor",
-  "checkpoint": "C:\\Users\\iness\\Desktop\\industrial_anomaly_detection\\models\\patchcore_transistor.ckpt",
-  "train_time_s": 2239.6,
+  "checkpoint": "C:\\Users\\DELL\\Desktop\\industrial_anomaly_detection\\models\\patchcore_transistor.ckpt",
+  "train_time_s": 1654.2,
   "memory_bank_shape": [
     21811,
     1536
   ],
-  "image_threshold_raw": 37.67742156982422,
-  "pixel_threshold_raw": 31.754966735839844,
+  "image_threshold_raw": 37.67741394042969,
+  "pixel_threshold_raw": 31.75440216064453,
   "image_score_range_raw": [
-    29.504663467407227,
-    67.68598175048828
+    29.50471305847168,
+    67.6860122680664
   ],
   "pixel_score_range_raw": [
-    10.374164581298828,
-    67.3942642211914
+    10.374176979064941,
+    67.39425659179688
   ],
   "model_class": "Patchcore",
   "model_config": {
