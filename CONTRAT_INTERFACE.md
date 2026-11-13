@@ -32,6 +32,24 @@ même envelopper l'appel dans `@st.cache_resource` si vous voulez.
 | `raw_threshold` | `float` | seuil brut (pour info) |
 | `image_size` | `[H, W]` | taille de l'image d'entrée |
 | `inference_time_ms` | `float` | temps d'inférence |
+| `in_domain` | `bool` | **ajout** : `False` si l'image ne ressemble pas aux images d'entraînement (photo web, autre caméra, autre fond). Le verdict `status` n'est alors **pas fiable** |
+| `domain_score` | `float` | **ajout** : médiane de la carte d'anomalie / seuil pixel. Images MVTec : environ 0.4 à 0.9. Photos web : au-dessus de 1.3 |
+| `domain_threshold` | `float` | **ajout** : seuil utilisé (`config.yaml`, section `domain_check`) |
+
+### Image hors domaine (`in_domain == False`) : à gérer côté B
+
+Les clés existantes ne changent pas. Mais quand `in_domain` est `False`, toute l'image est jugée « anormale »
+simplement parce qu'elle ne ressemble pas aux photos de la ligne de production, et non parce qu'il y a un défaut.
+Il ne faut donc **pas** envoyer ce résultat au LLM comme un défaut. Il faut plutôt afficher par exemple :
+
+> « Image non conforme aux conditions de prise de vue (cadrage, fond, éclairage différents des images
+> d'entraînement). Résultat non fiable : reprendre la photo sur le poste d'inspection. »
+
+```python
+if not result["in_domain"]:
+    # pas de post-traitement des régions, pas d'appel au LLM (ou un prompt dédié « image non exploitable »)
+    ...
+```
 
 > `to_json(result)` renvoie le même dictionnaire **sans** `anomaly_map` (sérialisable en JSON).
 

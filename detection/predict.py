@@ -8,6 +8,8 @@
     result["threshold"]       # 0.5
     result["anomaly_map"]     # np.ndarray float32 (H, W) dans [0, 1], même taille que l'image d'entrée
                               # pixel suspect  <=>  anomaly_map >= result["pixel_threshold"] (0.5)
+    result["in_domain"]       # False si l'image ne ressemble pas aux images d'entraînement
+                              # (photo web, autre caméra...) : le verdict n'est alors pas fiable
 
 Usage en ligne de commande :
     python -m detection.predict --image chemin/image.png --category cable --out overlay.png
@@ -114,6 +116,12 @@ def predict(image, category: str, config: str | Path | None = None) -> dict:
     amap = normalize(raw_map, float(pp.pixel_min), float(pp.pixel_max), pix_thr)
     amap = _map_to_original(amap, cfg, h, w)
 
+    # Contrôle « hors domaine » : un vrai défaut est LOCAL, la plupart des patchs restent proches
+    # de la banque mémoire. Si la MÉDIANE de la carte dépasse le seuil pixel, c'est toute l'image
+    # qui est étrangère au modèle (autre caméra, autre fond, photo web...) : le verdict n'est pas fiable.
+    domain_score = float(np.median(raw_map) / pix_thr) if pix_thr else 0.0
+    domain_thr = _domain_threshold(cfg, category)
+
     return {
         "category": category,
         "status": "anomalous" if raw_score >= img_thr else "normal",
@@ -125,7 +133,17 @@ def predict(image, category: str, config: str | Path | None = None) -> dict:
         "raw_threshold": round(img_thr, 4),
         "image_size": [h, w],
         "inference_time_ms": round(dt, 1),
+        # Ajouts (compatibles) : fiabilité de l'image par rapport au domaine d'entraînement
+        "in_domain": domain_score <= domain_thr,
+        "domain_score": round(domain_score, 4),
+        "domain_threshold": domain_thr,
     }
+
+
+def _domain_threshold(cfg: dict, category: str) -> float:
+    """Seuil « hors domaine » : config.yaml > domain_check (par catégorie, sinon valeur par défaut)."""
+    dc = cfg.get("domain_check", {}) or {}
+    return float((dc.get("per_category") or {}).get(category, dc.get("threshold", 1.0)))
 
 
 def to_json(result: dict) -> dict:

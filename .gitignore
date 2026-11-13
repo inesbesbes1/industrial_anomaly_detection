@@ -10,3 +10,5 @@ tests/_out*/
 venv/
 # Les résultats (métriques, figures) peuvent être versionnés, sauf les gros fichiers :
 results/**/predictions.npz
+# Variantes générées par external/make_shifted.py (186 Mo, régénérables)
+external/shifted/

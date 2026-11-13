@@ -98,6 +98,37 @@ with tab_inspect:
 
         latency_ms = (time.perf_counter() - t_start) * 1000
 
+        # --- CONTRÔLE « HORS DOMAINE » (fourni par predict, voir CONTRAT_INTERFACE.md) ---
+        # L'image ne ressemble pas aux images d'entraînement (photo web, autre caméra, autre fond) :
+        # toute l'image paraît « anormale », ce n'est PAS un défaut. On n'envoie rien au LLM.
+        if not pred_res.get("in_domain", True):
+            if st.session_state.get("last_scanned") != uploaded_file.name:
+                st.session_state.inspections_history.append({
+                    "timestamp": datetime.now().strftime("%H:%M:%S"),
+                    "file_name": uploaded_file.name,
+                    "category": category,
+                    "score": round(float(pred_res["anomaly_score"]), 3),
+                    "decision": "HORS_DOMAINE",
+                    "severity": "N/A",
+                    "latency_ms": round(latency_ms, 1)
+                })
+                st.session_state.last_scanned = uploaded_file.name
+            st.divider()
+            st.warning(
+                "### 📷 Image non exploitable : conditions de prise de vue non conformes\n"
+                f"Cette image ne ressemble pas aux images de la ligne **{category.upper()}** sur lesquelles le "
+                "modèle a été entraîné (cadrage, fond, éclairage ou caméra différents). "
+                "Le verdict serait **non fiable** : aucun diagnostic n'est généré.\n\n"
+                "**Action :** reprendre la photo sur le poste d'inspection (caméra et éclairage de la ligne)."
+            )
+            st.caption(f"Indice de dépaysement : {pred_res['domain_score']:.2f} "
+                       f"(limite : {pred_res['domain_threshold']:.2f})")
+            c1, c2 = st.columns(2)
+            c1.image(img_np, caption="Image reçue", use_container_width=True)
+            c2.image(colorize(pred_res["anomaly_map"]), caption="Heatmap : anormale presque partout",
+                     use_container_width=True)
+            st.stop()
+
         # Post-traitement OpenCV avec sévérité
         pred_res["threshold"] = sensitivity
         pred_res["pixel_threshold"] = sensitivity
@@ -208,7 +239,9 @@ with tab_analytics:
         pass_count = len(df_hist[df_hist["decision"] == "PASS"])
         reject_count = len(df_hist[df_hist["decision"] == "REJECT"])
         review_count = len(df_hist[df_hist["decision"] == "REVIEW"])
-        yield_rate = (pass_count / total_scans) * 100
+        # Les images hors domaine ne sont pas des pièces inspectées : exclues du taux de conformité
+        n_valid = total_scans - len(df_hist[df_hist["decision"] == "HORS_DOMAINE"])
+        yield_rate = (pass_count / n_valid) * 100 if n_valid else 0.0
         avg_lat = df_hist["latency_ms"].mean()
 
         # KPIs industriels

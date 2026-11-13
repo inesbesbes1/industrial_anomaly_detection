@@ -1,6 +1,5 @@
 """Générateur de rapport PDF normé Keyence Style - ISO 9001 (Personne B)."""
 
-from IPython.utils import contexts
 import io
 import uuid
 import tempfile
