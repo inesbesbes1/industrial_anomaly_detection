@@ -18,6 +18,7 @@ def evaluate_severity_and_decision(predict_result: dict, regions: list[dict]) ->
         confidence = "MEDIUM (85 %)"
     else:
         confidence = "LOW (Zone de doute)"
+        
 
     # 1. Pièce conforme
     if status == "normal" or score < threshold:
