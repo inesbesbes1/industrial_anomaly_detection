@@ -9,6 +9,7 @@ def evaluate_severity_and_decision(predict_result: dict, regions: list[dict]) ->
     threshold = float(predict_result.get("threshold", 0.5))
     status = predict_result.get("status", "normal")
     category = predict_result.get("category", "inconnue")
+    
 
     margin = abs(score - threshold)
     if margin >= 0.25:
