@@ -1,0 +1,13 @@
+category,file,truth,verdict,anomaly_score,domain_score,domain_threshold,correct
+bottle,broken_contamination_glass_mouth_196850.png,broken,HORS_DOMAINE,1.0,1.5657,1.0,False
+bottle,broken_contamination_glass_mouth_196855.png,broken,HORS_DOMAINE,1.0,1.4442,1.0,False
+bottle,broken_glass_mouth_196850.png,broken,HORS_DOMAINE,1.0,1.583,1.0,False
+bottle,broken_glass_mouth_196855.png,broken,HORS_DOMAINE,1.0,1.4512,1.0,False
+bottle,good_glass_mouth_196850.png,good,HORS_DOMAINE,1.0,1.559,1.0,False
+bottle,good_glass_mouth_196855.png,good,HORS_DOMAINE,1.0,1.4378,1.0,False
+cable,broken_cut_insulation.png,broken,HORS_DOMAINE,1.0,1.2104,1.0,False
+cable,broken_missing_wire.png,broken,HORS_DOMAINE,1.0,1.2163,1.0,False
+cable,good_power_cable_us_3core.png,good,HORS_DOMAINE,1.0,1.2048,1.0,False
+transistor,broken_cut_lead_bc547.png,broken,anomalous,1.0,0.9338,1.45,True
+transistor,broken_misplaced_bc547.png,broken,anomalous,1.0,0.9822,1.45,True
+transistor,good_bc547.png,good,anomalous,1.0,0.94,1.45,False
