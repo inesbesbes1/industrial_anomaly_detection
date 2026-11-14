@@ -55,7 +55,7 @@ def fake_predict(img_rgb: np.ndarray, cat: str, simulate_defect: bool = True) ->
 st.sidebar.title("🏭 DefectLens")
 st.sidebar.caption("Système Industriel d'Inspection en Temps Réel")
 
-category = st.sidebar.selectbox("Ligne de fabrication", ["cable", "bottle"])
+category = st.sidebar.selectbox("Ligne de fabrication", ["bottle", "cable", "transistor"])
 use_fake = False
 model_name = "llama3.2:3b"
 st.sidebar.markdown("---")
