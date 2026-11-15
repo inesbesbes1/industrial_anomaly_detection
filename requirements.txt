@@ -12,5 +12,6 @@ numpy>=1.24
 # depuis https://pytorch.org/get-started/locally/ puis lancez pip install -r requirements.txt
 streamlit
 fpdf2
+qrcode
 ollama
 pillow

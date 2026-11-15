@@ -8,7 +8,7 @@ data:
   archives_dir: .
   # Dossier où le dataset sera extrait (structure MVTec AD standard)
   root: data/MVTecAD
-  categories: [leather]
+  categories: [bottle, cable, leather, transistor]
   train_batch_size: 16
   eval_batch_size: 16
   # Mettre 0 sous Windows si vous avez des erreurs de DataLoader
@@ -28,6 +28,18 @@ model:
   num_neighbors: 9
   image_size: [256, 256]
   center_crop: null              # ex. [224, 224] pour reproduire le papier exactement
+
+# Contrôle « hors domaine » dans predict() :
+#   domain_score = médiane(carte d'anomalie brute) / seuil pixel brut
+#   in_domain    = domain_score <= seuil
+# Calibré sur results/<cat>/domain_stats.csv (images de test MVTec vs photos externes).
+domain_check:
+  threshold: 1.0                 # = la moitié de l'image dépasse le seuil d'anomalie
+  # transistor : le défaut « misplaced » (transistor absent/déplacé) couvre jusqu'à 71 % de l'image
+  # (domain_score max 1.25 sur le test MVTec) ; photos web >= 1.64 -> seuil placé entre les deux.
+  # bottle : MVTec <= 0.86, web >= 1.30 ; cable : MVTec <= 0.82, web >= 1.33 -> 1.0 convient.
+  per_category:
+    transistor: 1.45
 
 training:
   seed: 42

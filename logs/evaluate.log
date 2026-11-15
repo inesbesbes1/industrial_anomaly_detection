@@ -1,0 +1,95 @@
+
+=== Évaluation : bottle ===
+Seed set to 42
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+GPU available: False, used: False
+TPU available: False, using: 0 TPU cores
+\U0001f4a1 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
++-------------------------------------------------------+
+|        Test metric        |       DataLoader 0        |
+|---------------------------+---------------------------|
+|        image_AUROC        |            1.0            |
+|       image_F1Score       |    0.9919999837875366     |
+|        pixel_AUROC        |     0.985623300075531     |
+|       pixel_F1Score       |    0.7269942164421082     |
++-------------------------------------------------------+
+Testing -------------------------------------- 6/6 0:01:02 • 0:00:00 0.11it/s 
+The following callbacks returned in `LightningModule.configure_callbacks` will override existing callbacks passed to Trainer: Evaluator, ImageVisualizer, PostProcessor, PreProcessor
+Predicting ----------------------------------- 6/6 0:01:02 • 0:00:00 0.11it/s 
+[bottle] AUROC image = 1.0000 | AUROC pixel = 0.9856 | F1 = 1.0000 | FP = 0 | FN = 0
+
+=== Évaluation : cable ===
+Seed set to 42
+GPU available: False, used: False
+TPU available: False, using: 0 TPU cores
+\U0001f4a1 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
++-------------------------------------------------------+
+|        Test metric        |       DataLoader 0        |
+|---------------------------+---------------------------|
+|        image_AUROC        |    0.9868815541267395     |
+|       image_F1Score       |    0.9621621370315552     |
+|        pixel_AUROC        |    0.9850692749023438     |
+|       pixel_F1Score       |    0.6399767398834229     |
++-------------------------------------------------------+
+Testing ------------------------------------ 10/10 0:02:05 • 0:00:00 0.10it/s 
+The following callbacks returned in `LightningModule.configure_callbacks` will override existing callbacks passed to Trainer: Evaluator, ImageVisualizer, PostProcessor, PreProcessor
+Predicting --------------------------------- 10/10 0:02:06 • 0:00:00 0.10it/s 
+[cable] AUROC image = 0.9869 | AUROC pixel = 0.9851 | F1 = 0.9677 | FP = 4 | FN = 2
+
+=== Évaluation : transistor ===
+Seed set to 42
+GPU available: False, used: False
+TPU available: False, using: 0 TPU cores
+\U0001f4a1 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
++-------------------------------------------------------+
+|        Test metric        |       DataLoader 0        |
+|---------------------------+---------------------------|
+|        image_AUROC        |    0.9937499761581421     |
+|       image_F1Score       |     0.949999988079071     |
+|        pixel_AUROC        |    0.9727758765220642     |
+|       pixel_F1Score       |    0.6084546446800232     |
++-------------------------------------------------------+
+Testing -------------------------------------- 7/7 0:01:23 • 0:00:00 0.11it/s 
+The following callbacks returned in `LightningModule.configure_callbacks` will override existing callbacks passed to Trainer: Evaluator, ImageVisualizer, PostProcessor, PreProcessor
+Predicting ----------------------------------- 7/7 0:01:21 • 0:00:00 0.11it/s 
+[transistor] AUROC image = 0.9938 | AUROC pixel = 0.9728 | F1 = 0.9630 | FP = 2 | FN = 1
+
+## Résultats globaux
+
+| Catégorie | AUROC image | AUROC pixel | F1 image | Précision | Rappel | Fausses alarmes | Temps / image |
+|---|---|---|---|---|---|---|---|
+| bottle | 100.0 % | 98.6 % | 100.0 % | 100.0 % | 100.0 % | 0.0 % | 756 ms |
+| cable | 98.7 % | 98.5 % | 96.8 % | 95.7 % | 97.8 % | 6.9 % | 855 ms |
+| transistor | 99.4 % | 97.3 % | 96.3 % | 95.1 % | 97.5 % | 3.3 % | 824 ms |
+
+
+### bottle : détail par type de défaut
+
+| Type de défaut | Images | AUROC image | Taux de détection | AUROC pixel |
+|---|---|---|---|---|
+| broken_large | 20 | 100.0 % | 100.0 % | 98.3 % |
+| broken_small | 22 | 100.0 % | 100.0 % | 99.4 % |
+| contamination | 21 | 100.0 % | 100.0 % | 97.3 % |
+
+### cable : détail par type de défaut
+
+| Type de défaut | Images | AUROC image | Taux de détection | AUROC pixel |
+|---|---|---|---|---|
+| bent_wire | 13 | 100.0 % | 100.0 % | 98.6 % |
+| cable_swap | 12 | 93.8 % | 91.7 % | 96.7 % |
+| combined | 11 | 100.0 % | 100.0 % | 97.0 % |
+| cut_inner_insulation | 14 | 99.4 % | 100.0 % | 98.4 % |
+| cut_outer_insulation | 10 | 99.5 % | 100.0 % | 93.3 % |
+| missing_cable | 12 | 100.0 % | 100.0 % | 99.5 % |
+| missing_wire | 10 | 99.8 % | 100.0 % | 99.5 % |
+| poke_insulation | 10 | 96.9 % | 90.0 % | 98.7 % |
+
+### transistor : détail par type de défaut
+
+| Type de défaut | Images | AUROC image | Taux de détection | AUROC pixel |
+|---|---|---|---|---|
+| bent_lead | 10 | 99.7 % | 100.0 % | 98.3 % |
+| cut_lead | 10 | 99.8 % | 100.0 % | 97.2 % |
+| damaged_case | 10 | 99.8 % | 100.0 % | 98.6 % |
+| misplaced | 10 | 98.2 % | 90.0 % | 86.5 % |
+

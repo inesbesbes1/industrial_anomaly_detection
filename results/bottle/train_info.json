@@ -1,19 +1,19 @@
 {
   "category": "bottle",
-  "checkpoint": "C:\\Users\\iness\\Desktop\\industrial_anomaly_detection\\models\\patchcore_bottle.ckpt",
-  "train_time_s": 2496.7,
+  "checkpoint": "C:\\Users\\DELL\\Desktop\\industrial_anomaly_detection\\models\\patchcore_bottle.ckpt",
+  "train_time_s": 3979.8,
   "memory_bank_shape": [
     21401,
     1536
   ],
-  "image_threshold_raw": 37.87176513671875,
-  "pixel_threshold_raw": 37.21614074707031,
+  "image_threshold_raw": 37.87177276611328,
+  "pixel_threshold_raw": 37.21615219116211,
   "image_score_range_raw": [
-    21.161548614501953,
-    75.83924865722656
+    21.161388397216797,
+    75.8392562866211
   ],
   "pixel_score_range_raw": [
-    1.9623944759368896,
+    1.9623924493789673,
     75.32797241210938
   ],
   "model_class": "Patchcore",

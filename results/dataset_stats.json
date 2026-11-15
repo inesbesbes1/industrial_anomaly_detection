@@ -57,5 +57,30 @@
       "missing_wire",
       "poke_insulation"
     ]
+  },
+  "transistor": {
+    "train_good": 213,
+    "test": {
+      "bent_lead": 10,
+      "cut_lead": 10,
+      "damaged_case": 10,
+      "good": 60,
+      "misplaced": 10
+    },
+    "masks": {
+      "bent_lead": 10,
+      "cut_lead": 10,
+      "damaged_case": 10,
+      "misplaced": 10
+    },
+    "resolution": "1024x1024",
+    "test_good": 60,
+    "test_defect": 40,
+    "defect_types": [
+      "bent_lead",
+      "cut_lead",
+      "damaged_case",
+      "misplaced"
+    ]
   }
 }

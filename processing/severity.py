@@ -10,6 +10,7 @@ def evaluate_severity_and_decision(predict_result: dict, regions: list[dict]) ->
     status = predict_result.get("status", "normal")
     category = predict_result.get("category", "inconnue")
 
+
     margin = abs(score - threshold)
     if margin >= 0.25:
         confidence = "HIGH (98 %)"
@@ -17,6 +18,7 @@ def evaluate_severity_and_decision(predict_result: dict, regions: list[dict]) ->
         confidence = "MEDIUM (85 %)"
     else:
         confidence = "LOW (Zone de doute)"
+        
 
     # 1. Pièce conforme
     if status == "normal" or score < threshold:
