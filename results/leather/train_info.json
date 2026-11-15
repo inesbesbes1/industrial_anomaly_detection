@@ -1,0 +1,36 @@
+{
+  "category": "leather",
+  "checkpoint": "/content/gdrive/MyDrive/projet_cv/leather_results/models/patchcore_leather.ckpt",
+  "train_time_s": 134.7,
+  "memory_bank_shape": [
+    25190,
+    1536
+  ],
+  "image_threshold_raw": 39.09843063354492,
+  "pixel_threshold_raw": 50.56528854370117,
+  "image_score_range_raw": [
+    24.231163024902344,
+    85.25093841552734
+  ],
+  "pixel_score_range_raw": [
+    13.522915840148926,
+    84.01549530029297
+  ],
+  "model_class": "Patchcore",
+  "model_config": {
+    "backbone": "wide_resnet50_2",
+    "layers": [
+      "layer2",
+      "layer3"
+    ],
+    "pre_trained": true,
+    "coreset_sampling_ratio": 0.1,
+    "num_neighbors": 9,
+    "image_size": [
+      256,
+      256
+    ],
+    "center_crop": null
+  },
+  "val_split_mode": "same_as_test"
+}
