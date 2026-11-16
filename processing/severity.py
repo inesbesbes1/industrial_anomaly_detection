@@ -50,9 +50,21 @@ def evaluate_severity_and_decision(predict_result: dict, regions: list[dict]) ->
             actions = [
                 "Éjecter immédiatement le faisceau (risque majeur de court-circuit).",
                 "Contrôler la station de sertissage et l'outil de dénudage.",
-                "Consigner le défaut dans le registre de non-conformité."
+                "Consigner le défaut dans le registre de non-conformité IPC-A-620."
             ]
-        else:
+        elif category == "transistor":
+            actions = [
+                "Éjecter le composant (risque de court-circuit ou rupture de broche).",
+                "Isoler le composant sous protection antistatique (ESD).",
+                "Vérifier la machine de placement / sertissage selon IPC-A-610H."
+            ]
+        elif category == "leather":
+            actions = [
+                "Isoler la pièce de cuir (défaut traversant ou découpe non conforme).",
+                "Déclasser la zone pour découpe de pièces secondaires.",
+                "Vérifier la lame de coupe et la tension du cuir."
+            ]
+        else:  # bottle
             actions = [
                 "Éjecter la bouteille (risque critique de bris / éclat de verre).",
                 "Vérifier le poste d'embouteillage amont.",

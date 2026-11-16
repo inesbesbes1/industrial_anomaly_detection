@@ -16,7 +16,7 @@ import numpy as np
 import pandas as pd
 
 from processing.postprocessing import build_llm_payload, get_binary_mask
-from llm.model import stream_llm
+from llm.model import stream_llm, stream_vlm
 from reporting.pdf_generator import generate_inspection_pdf
 from detection.visualize import overlay_heatmap, draw_contours, colorize
 
@@ -25,7 +25,8 @@ st.set_page_config(page_title="Industrial Vision QC - Sentinex", layout="wide", 
 # --- INITIALISATION DE L'HISTORIQUE DE PRODUCTION ---
 if "inspections_history" not in st.session_state:
     st.session_state.inspections_history = []
-
+if "baseline_calibration" not in st.session_state:
+    st.session_state.baseline_calibration = {}
 
 def fake_predict(img_rgb: np.ndarray, cat: str, simulate_defect: bool = True) -> dict:
     h, w = img_rgb.shape[:2]
@@ -59,10 +60,36 @@ category = st.sidebar.selectbox("Ligne de fabrication", ["bottle", "cable", "lea
 use_fake = False
 model_name = "llama3.2:3b"
 st.sidebar.markdown("---")
-sensitivity = st.sidebar.slider("Seuil de décision optique", 0.30, 0.70, 0.50, 0.05)
+sensitivity = st.sidebar.slider("Seuil de décision optique", 0.10, 0.80, 0.25, 0.05)
 st.sidebar.caption(f"Seuil actuel : {sensitivity} (Norme MVTec : 0.50)")
+force_inspect = st.sidebar.checkbox("Forcer l'inspection (Bypass hors-domaine)", value=False)
+st.sidebar.markdown("---")
+# --- PARAMÈTRES AVANCÉS (DISCRET) ---
+with st.sidebar.expander("⚙️ Paramètres Avancés (IA & Vision)", expanded=False):
+    use_vlm = st.checkbox("Activer l'inspection multimodale (VLM Moondream)", value=False)
+st.sidebar.subheader("🛠️ Étalonnage Référence (Zero-Shot)")
+ref_file = st.sidebar.file_uploader(
+    "Déposer 1 pièce saine de référence :",
+    type=["png", "jpg", "jpeg"],
+    key="calib_uploader"
+)
 
+if ref_file is not None:
+    ref_img = np.array(Image.open(ref_file).convert("RGB"))
+    if st.sidebar.button("💾 Enregistrer la Référence Ligne"):
+        with st.sidebar.status("Calcul de l'empreinte de référence..."):
+            from detection.predict import predict
+            res_ref = predict(ref_img, category=category)
+            st.session_state.baseline_calibration[category] = res_ref["anomaly_map"]
+            st.sidebar.success(f"Ligne {category.upper()} étalonnée avec succès !")
 
+if category in st.session_state.baseline_calibration:
+    st.sidebar.caption("🟢 Statut : Ligne Étalonnée (Baseline active)")
+    if st.sidebar.button("Réinitialiser l'étalonnage"):
+        del st.session_state.baseline_calibration[category]
+        st.rerun()
+else:
+    st.sidebar.caption("⚪ Statut : Étalonnage standard MVTec usine")
 # --- NAVIGATION PAR ONGLETS ---
 tab_inspect, tab_analytics = st.tabs([
     "🔬 Poste d'Inspection (Live QC)",
@@ -92,6 +119,20 @@ with tab_inspect:
                 try:
                     from detection.predict import predict
                     pred_res = predict(img_np, category=category)
+
+                                        # Application de l'étalonnage différentiel si la ligne est calibrée
+                    if category in st.session_state.baseline_calibration:
+                        base_map = st.session_state.baseline_calibration[category]
+                        # Différence absolue entre l'image et l'empreinte saine
+                        diff_map = np.abs(pred_res["anomaly_map"] - base_map)
+                        # Normalisation et amplification du défaut pour faire ressortir l'anomalie
+                        if np.max(diff_map) > 0:
+                            diff_map = diff_map / (np.mean(diff_map) + 1e-4) * 0.35
+                            diff_map = np.clip(diff_map, 0.0, 1.0)
+                        pred_res["anomaly_map"] = diff_map
+                        pred_res["anomaly_score"] = float(np.max(diff_map))
+                        pred_res["status"] = "anomalous" if pred_res["anomaly_score"] >= sensitivity else "normal"
+                        pred_res["in_domain"] = True
                 except Exception as e:
                     st.error(f"Erreur d'inférence : {e}")
                     st.stop()
@@ -101,7 +142,7 @@ with tab_inspect:
         # --- CONTRÔLE « HORS DOMAINE » (fourni par predict, voir CONTRAT_INTERFACE.md) ---
         # L'image ne ressemble pas aux images d'entraînement (photo web, autre caméra, autre fond) :
         # toute l'image paraît « anormale », ce n'est PAS un défaut. On n'envoie rien au LLM.
-        if not pred_res.get("in_domain", True):
+        if not pred_res.get("in_domain", True) and not force_inspect:
             if st.session_state.get("last_scanned") != uploaded_file.name:
                 st.session_state.inspections_history.append({
                     "timestamp": datetime.now().strftime("%H:%M:%S"),
@@ -211,7 +252,10 @@ with tab_inspect:
 
         with col_llm:
             st.markdown("#### 🤖 Diagnostic de l'Ingénieur Qualité (LLM)")
-            report_text = st.write_stream(stream_llm(payload, model_name=model_name))
+            if use_vlm:
+                report_text = st.write_stream(stream_vlm(payload, overlay_with_contours, model_name="moondream"))
+            else:
+                report_text = st.write_stream(stream_llm(payload, model_name=model_name))
 
         # --- EXPORT DU RAPPORT PDF ---
         st.divider()
