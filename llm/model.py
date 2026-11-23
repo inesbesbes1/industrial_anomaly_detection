@@ -64,8 +64,10 @@ def stream_vlm(payload: dict, img_rgb, model_name: str = "moondream", llm_model:
 
     cat = payload.get("category", "piece")
     vlm_prompt = (
-        f"Look at this industrial {cat} image. "
-        "Describe in one concise sentence what physical defect or surface anomaly you see."
+        f"This is an industrial quality control image of a {cat}. "
+        f"An anomaly detection model flagged it with a high anomaly score. "
+        "Describe in ONE sentence the visible physical defect you see. "
+        "Use only words. Do NOT return numbers, coordinates, or lists."
     )
 
     try:
@@ -74,8 +76,18 @@ def stream_vlm(payload: dict, img_rgb, model_name: str = "moondream", llm_model:
             messages=[{"role": "user", "content": vlm_prompt, "images": [img_bytes]}]
         )
         visual_desc = vlm_res["message"]["content"].strip()
+
+        # Nettoyage : si Moondream renvoie quand même des coordonnées,
+        # on supprime tout ce qui ressemble à [chiffres] ou (chiffres)
+        import re
+        visual_desc = re.sub(r"[\[\(][\d\s\.,]+[\]\)]", "", visual_desc).strip()
+
+        # Fallback si vide après nettoyage
+        if not visual_desc or len(visual_desc) < 10:
+            visual_desc = f"Anomalie visuelle détectée sur la surface de la pièce {cat}."
+
     except Exception:
-        visual_desc = "Anomalie géométrique détectée par la caméra."
+        visual_desc = "Anomalie géométrique détectée par la caméra industrielle."
 
     user_prompt = (
         f"Voici le relevé d'inspection de la pièce :\n"
