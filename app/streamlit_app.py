@@ -311,3 +311,4 @@ with tab_analytics:
         # Tableau d'historique
         st.markdown("##### 📋 Journal d'Audit de Production")
         st.dataframe(df_hist, use_container_width=True)
+        
